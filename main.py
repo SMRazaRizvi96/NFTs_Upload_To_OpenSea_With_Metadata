@@ -329,6 +329,8 @@ class OpenSea:
     def login(self) -> None:
         """Login to OpenSea using MetaMask."""
         try:  # Try to login to the OpenSea using MetaMask.
+            web.window_handles(2)  # Switch to the main (data:,) tab.
+            web.driver.close()
             print('Login to OpenSea.', end=' ')
             web.window_handles(1)  # Switch to the main (data:,) tab.
             web.driver.get(self.login_url)  # Go to the OpenSea login URL.
@@ -644,15 +646,12 @@ if __name__ == '__main__':
     action = [1]
     reader = Reader(data_file())  # Ask for a file and read it.
     structure = Structure(action)
+    web = Webdriver()  # Start a new webdriver and init its methods.
+    opensea = OpenSea()  # Init the OpenSea clas.
+    wallet.login()  # Connect to MetaMask.
+    opensea.login()  # Connect to OpenSea.
 
-    for nft_number in range(reader.lenght_file):
-
-        web = Webdriver()  # Start a new webdriver and init its methods.
-        opensea = OpenSea()  # Init the OpenSea clas.
-        wallet.login()  # Connect to MetaMask.
-        opensea.login()  # Connect to OpenSea.
-
-    
+    for nft_number in range(reader.lenght_file):   
         structure.get_data(nft_number)  # Structure the data of the NFT.
         upload = None  # Prevent Undefined value error.
         upload = opensea.upload(nft_number + 1)  # Upload the NFT.
@@ -662,6 +661,6 @@ if __name__ == '__main__':
                     opensea.sale(nft_number + 1)  # Sell NFT.
         
 
-        web.driver.quit()  # Stop the webdriver.
+    web.driver.quit()  # Stop the webdriver.
     
     print(f'\n{green}All done! Your NFTs have been uploaded/sold.{reset}')
