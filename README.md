@@ -1,7 +1,11 @@
 # NFTs_Upload_To_OpenSea_With_Metadata
 
-FORK -> https://github.com/maximedrn/opensea-automatic-bulk-upload-and-sale
-Credits to @maximedrn
+FORK -> https://github.com/nftdevs/NFTs_Upload_To_OpenSea_With_Metadata
+Credits to @nftdevs
+
+# Improvements:
+- Solved the problem of an extra 'data:/' tab in Chrome driver
+- Solved the problem of re-openning and quitting of the Chrome driver on every NFT Upload and Sell. Now, just one Chrome Driver opens up and uploads all the NFTs, hence speeding up the process.
 
 ## Instructions:
 
